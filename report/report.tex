@@ -1,0 +1,129 @@
+\documentclass[11pt]{article}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage[normalem]{ulem}
+\usepackage{amsmath}
+\usepackage{xcolor}
+\usepackage{listings}
+\usepackage{listingsutf8}
+\usepackage{lstautogobble}
+\usepackage{titling}
+\usepackage{fancyhdr}
+\usepackage{graphicx}
+\usepackage{underscore}
+\usepackage{hyperref}
+\graphicspath{{images/}}
+
+\newcommand{\headerhaegri}{}
+\newcommand{\headermidja}{University of Southern California}
+\newcommand{\headervinstri}{}
+\newcommand{\headerhaed}{14pt}
+\newcommand{\headertykkt}{0.4pt}
+
+% Title
+\newcommand{\nafnanamskeidi}{CSCI531 Applied Cryptogrophy\\Final Project}
+\newcommand{\nafnaverkefni}{EHR Audit System}
+\newcommand{\nafnanemanda}{Student: Hallgrimur David Egilsson\\USC ID: 6059-2639-79\vspace{4mm}}
+\newcommand{\nafnakennara}{Professor: Dr. Tatyana Ryutov}
+\newcommand{\dagsetning}{\today}
+\setlength{\droptitle}{-20mm}
+\newcommand{\haednemanda}{-2mm}
+\newcommand{\haeddagsetningar}{0mm}
+\newcommand{\haedtexta}{0mm}
+
+% Page 1 footer
+\newcommand{\footervinstri}{}
+\newcommand{\footermidja}{}
+\newcommand{\footerhaegri}{}
+\newcommand{\footertykkt}{0.4pt}
+
+% Page 2,3,4,... header
+\lhead{CSCI 531}
+\chead{}
+\rhead{\nafnaverkefni}
+\renewcommand{\headrulewidth}{0.4pt}
+
+% Page 2,3,4,... footer
+\lfoot{}
+\cfoot{\thepage}
+\rfoot{}
+\renewcommand{\footrulewidth}{0.4pt}
+\usepackage[top = 1.8in
+		   ,bottom=1.715in
+		   ,left=1.76in
+		   ,right=1.76in
+		   ]{geometry}
+
+
+\let\oldfrac\frac
+\let\frac\dfrac
+
+\pagestyle{fancy}
+\fancypagestyle{bls1}
+{
+	\fancyhf{}
+	\lhead{\headervinstri}
+	\chead{\headermidja}
+	\rhead{\headerhaegri}
+	\headheight = \headerhaed
+	\lfoot{\footervinstri}
+	\cfoot{\footermidja}
+	\rfoot{\footerhaegri}
+	\renewcommand{\headrulewidth}{\headertykkt}
+	\renewcommand{\footrulewidth}{\footertykkt}
+}
+
+\title{
+\huge\nafnanamskeidi\\
+\vspace{8mm}
+\nafnaverkefni\vspace{\haednemanda}}
+\author{\nafnanemanda\\
+        \nafnakennara\vspace{\haeddagsetningar}}
+\date{\dagsetning\vspace{\haedtexta}}
+
+\setlength{\parindent}{4em}
+\setlength{\parskip}{4mm}
+
+\renewcommand{\lstlistingname}{}
+\lstset{frame=lines}
+\lstset{caption={}}
+\lstset{label={lst:code_direct}}
+\lstset{basicstyle=\footnotesize}
+\lstset{autogobble=true}
+\lstset{literate = {-}{-}1}
+\lstset{inputencoding=utf8/latin9}
+
+\begin{document}
+	\maketitle
+	\thispagestyle{bls1}
+	
+	\begin{flushleft}
+		
+		\vspace{24mm}
+		I have read the Guide to Avoiding Plagiarism published by the student affairs office. I understand what is expected of me with respect to properly citing sources, and how to avoid representing the work of others as my own. The material in this paper was written by me, except for such material that is quoted or indented and properly cited to indicate the sources of the material. I understand that using the words of others, and simply tagging the sentence, paragraph, or section with a tag to the copied source does not constitute proper citation and that if such material is used verbatim or paraphrased it must be specifically conveyed (such as through the use of quotation marks or indentation) together with the citation. I further understand that overuse of properly cited quotations to avoid conveying the information in my own words, while it will not subject me to disciplinary action, does convey to the instructor that I do not understand the material enough to explain it in my own words, and will likely result in a lesser grade on the paper.
+		
+		Signed: Hallgrimur David Egilsson
+		
+		\newpage
+		
+		\section{Introduction}
+		
+		Example citation \cite{neuman2009challenges}
+		
+		\section{Example section}
+		
+		\subsection{Example subsection 1}
+		
+		\subsection{Example subsection 2}
+		
+		\newpage
+		
+		\bibliography{citations.bib}
+		
+		\bibliographystyle{ieeetr}
+		
+		
+	\end{flushleft}
+	
+\end{document}

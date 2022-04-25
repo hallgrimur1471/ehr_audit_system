@@ -1,0 +1,8 @@
+.vscode
+__pycache__
+report/*.aux
+report/*.log
+report/*.out
+report/*.gz
+report/*.bbl
+report/*.blg
