@@ -2,6 +2,8 @@ import os
 import json
 from datetime import datetime
 
+from ehr_server.time import TIME_FORMAT
+
 
 class EHR:
     def __init__(self, id: str, created: datetime, description: str):
@@ -13,7 +15,7 @@ class EHR:
         return json.dumps(
             {
                 "id": self.id,
-                "created": self.created.strftime("%Y-%m-%d %H:%M:%S"),
+                "created": self.created.strftime(TIME_FORMAT),
                 "description": self.description,
             },
             indent=2,

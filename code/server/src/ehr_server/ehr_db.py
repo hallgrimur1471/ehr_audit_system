@@ -5,28 +5,12 @@ import json
 from datetime import datetime
 
 from ehr_server.ehr import EHR
+from ehr_server.database import DBEditor
+from ehr_server.time import TIME_FORMAT
 
 log = logging.getLogger("ehr_server.server")
 
 DB_FILE = Path("/home/david1471/ehr_audit_system/code/server/ehr_db.json")
-
-
-class DBEditor:
-    def __init__(self):
-        self.db = None
-
-    def __enter__(self):
-        self.db = self.read_db()
-        return self.db
-
-    def __exit__(self, exc_type, exc_value, tb):
-        self.update_db()
-
-    def read_db(self):
-        return json.loads(DB_FILE.read_text())
-
-    def update_db(self):
-        DB_FILE.write_text(json.dumps(self.db, indent=2) + "\n")
 
 
 def initialize():
@@ -41,7 +25,7 @@ def initialize():
 
 
 def add_record(patient: str, record: EHR):
-    with DBEditor() as db:
+    with DBEditor(DB_FILE) as db:
         if patient not in db:
             db[patient] = {}
 
@@ -54,28 +38,28 @@ def add_record(patient: str, record: EHR):
 
 
 def delete_record(patient: str, record_id: str):
-    with DBEditor() as db:
+    with DBEditor(DB_FILE) as db:
         check_if_record_exists(patient, record_id, db)
 
         del db[patient][record_id]
 
 
 def change_record(patient: str, record_id: str, new_description: str):
-    with DBEditor() as db:
+    with DBEditor(DB_FILE) as db:
         check_if_record_exists(patient, record_id, db)
 
         db[patient][record_id]["description"] = new_description
 
 
 def get_record(patient: str, record_id: str) -> EHR:
-    with DBEditor() as db:
+    with DBEditor(DB_FILE) as db:
         check_if_record_exists(patient, record_id, db)
 
         return dict_2_ehr(db[patient][record_id])
 
 
 def get_records(patient: str) -> List[EHR]:
-    with DBEditor() as db:
+    with DBEditor(DB_FILE) as db:
         check_if_patient_exists(patient, db)
 
         return [dict_2_ehr(r) for _, r in db[patient].items()]
@@ -94,5 +78,5 @@ def check_if_patient_exists(patient, db):
 
 
 def dict_2_ehr(d):
-    dt = datetime.strptime(d["created"], "%Y-%m-%d %H:%M:%S")
+    dt = datetime.strptime(d["created"], TIME_FORMAT)
     return EHR(id=d["id"], created=dt, description=d["description"])
