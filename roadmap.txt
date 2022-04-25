@@ -1,0 +1,25 @@
+Specs:
+* Five patients, two audit companies who attempt to access the audit data.
+* Guarding EHR data not required.
+* Audit data is given in clear as input to the system.
+* Should be scalable and distributed but for PoC simplicity it can run on single machine and socket programming is not needed, message exchange can be implemented by writing and reading to and from a file.
+* Confidentiality & integrity protection required of sensitive data in transit and at rest.
+* The system should enforce immutability, if an attacker tampers with some audit data the system should report the attack. Just detection of tempering is enough.
+* Implement routines to support identification and authorization
+* Implement routines to support "Decentralization" goal
+
+Queries:
+* Patients can query the system to monitor usage of their EHR data.
+* Audit companies can query the system to monitor usage of EHR data for a set of patients.
+
+Audit record:
+* Date and time of logged event
+* Patient ID whose record was accessed
+* User ID who performed the logged event
+* Action type (create, delete, change, query, print, copy)
+
+Questions:
+* Should audit companies only be allowed to query data?
+* Does a user have multiple EHR records or just one?
+    * User has multiple EHRs.
+* Is there nod ID of EHR record in the audit record?

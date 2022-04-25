@@ -6,3 +6,5 @@ report/*.out
 report/*.gz
 report/*.bbl
 report/*.blg
+.venv
+code/server/src/ehr_server_drvn.egg-info
