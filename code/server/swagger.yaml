@@ -1,0 +1,140 @@
+swagger: "2.0"
+info:
+  description: "API for doing EHR operations"
+  version: "1.0.0"
+  title: "EHR Rest API"
+host: "petstore.swagger.io"
+basePath: "/"
+tags:
+- name: "EHR"
+  description: "EHR actions"
+  externalDocs:
+    description: "Find out more"
+    url: "http://swagger.io"
+schemes:
+- "https"
+- "http"
+paths:
+  /:
+    get:
+      tags:
+      - "EHR"
+      summary: "API welcome message"
+      description: ""
+      responses:
+        "200":
+          description: "A welcome message"
+  /ehr/create/{patient_id}:
+    post:
+      tags:
+      - "EHR"
+      summary: "Create a new EHR"
+      parameters:
+      - name: "patient_id"
+        in: "path"
+        description: "ID of patient"
+        required: true
+        type: "string"
+        example: "alice"
+      - in: "body"
+        name: "data"
+        description: "EHR record to be added to the database"
+        required: true
+        schema:
+          type: "object"
+          required:
+          - "description"
+          properties:
+            description:
+              type: "string"
+              example: "Patient has symptom X which was remediated with Y"
+      responses:
+        "200":
+          description: "successful operation"
+  /ehr/delete/{patient_id}/{record_id}:
+    post:
+      tags:
+      - "EHR"
+      summary: "Delete a EHR"
+      parameters:
+      - name: "patient_id"
+        in: "path"
+        description: "ID of patient"
+        required: true
+        type: "string"
+        example: "alice"
+      - name: "record_id"
+        in: "path"
+        description: "ID of EHR to be deleted"
+        required: true
+        type: "string"
+        example: "e2ab83f70096686a0e7126721ae22be7"
+  /ehr/change/{patient_id}/{record_id}:
+    post:
+      tags:
+      - "EHR"
+      summary: "Change the description text in a EHR"
+      parameters:
+      - name: "patient_id"
+        in: "path"
+        description: "ID of patient"
+        required: true
+        type: "string"
+        example: "alice"
+      - name: "record_id"
+        in: "path"
+        description: "ID of EHR to be changed"
+        required: true
+        type: "string"
+        example: "e2ab83f70096686a0e7126721ae22be7"
+      - in: "body"
+        name: "data"
+        description: "The new description for the EHR"
+        required: true
+        schema:
+          type: "object"
+          required:
+          - "description"
+          properties:
+            description:
+              type: "string"
+              example: "Patient has symptom X which was remediated with Y and Z"
+      responses:
+        "200":
+          description: "successful operation"
+  /ehr/list/{patient_id}:
+    post:
+      tags:
+      - "EHR"
+      summary: "List all EHRs belonging to the patient"
+      parameters:
+      - name: "patient_id"
+        in: "path"
+        description: "ID of patient"
+        required: true
+        type: "string"
+        example: "alice"
+      responses:
+        "200":
+          description: "A list of EHR IDs"
+  /ehr/get/{patient_id}/{record_id}:
+    post:
+      tags:
+      - "EHR"
+      summary: "Fetch an existing EHR"
+      parameters:
+      - name: "patient_id"
+        in: "path"
+        description: "ID of patient"
+        required: true
+        type: "string"
+        example: "alice"
+      - name: "record_id"
+        in: "path"
+        description: "ID of EHR to be fetched"
+        required: true
+        type: "string"
+        example: "e2ab83f70096686a0e7126721ae22be7"
+      responses:
+        "200":
+          description: "a EHR"

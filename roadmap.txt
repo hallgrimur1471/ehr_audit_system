@@ -10,6 +10,7 @@ Specs:
 
 Queries:
 * Patients can query the system to monitor usage of their EHR data.
+    * Add get_query_history route?
 * Audit companies can query the system to monitor usage of EHR data for a set of patients.
 
 Audit record:
@@ -17,6 +18,10 @@ Audit record:
 * Patient ID whose record was accessed
 * User ID who performed the logged event
 * Action type (create, delete, change, query, print, copy)
+
+Architecture ideas:
+* EHR Rest API sends record to Audit Rest API, Audit Rest API encrypts data using patients public key and the audit companies public key and stores in the audit log.
+* When patient requests query data he needs to authenticate somehow (sign a timestamp? maybe sign instead a nonce sent by the Audit Rest API? Or server encrypts a random number with patient's public key and the patient needs to decrypt it and send it back?) Data is sent to the patient encrypted and symmetric key is sent encrypted as well using patient's key, just like it's stored.
 
 Questions:
 * Should audit companies only be allowed to query data?
