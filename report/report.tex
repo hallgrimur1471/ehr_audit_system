@@ -133,6 +133,11 @@
 		System architecture visualization: https://structurizr.com/dsl
 
 		Rest API specification: https://editor.swagger.io/
+
+		RSA PKCS#1 OEAP max message length: https://datatracker.ietf.org/doc/html/rfc8017#section-7.1
+			* Changed underlying hashing algorithm from SHA1 to SHA256 so max keysize is 190 bytes which is plenty enough (we just need 32 bytes for the 256 bit AES key)
+		
+		Using different keys for encryption & signing, probably more secure?
 		
 		\section{Introduction}
 

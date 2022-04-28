@@ -23,6 +23,55 @@ Architecture ideas:
 * EHR Rest API sends record to Audit Rest API, Audit Rest API encrypts data using patients public key and the audit companies public key and stores in the audit log.
 * When patient requests query data he needs to authenticate somehow (sign a timestamp? maybe sign instead a nonce sent by the Audit Rest API? Or server encrypts a random number with patient's public key and the patient needs to decrypt it and send it back?) Data is sent to the patient encrypted and symmetric key is sent encrypted as well using patient's key, just like it's stored.
 
+Authentication ideas:
+* server encrypts a random number with patient's public key and the patient needs to decrypt it and send it back
+    * Insecure against MitM attack (Lecture 7, slide 59) but only if public key is sent by patient (we need CA or hard-coded pubkeys on server end).
+    * Problem: nothing binds this exchange to subsequent communications.
+* server & patient establish a shared secret and patient sends some MAC message (timestamp?)
+* Authenticate every message PGP style
+
+Signing:
+* Use RSA-FDH (Lecture 9, slide 52)
+* Use ECDSA (NIST standard): https://pycryptodome.readthedocs.io/en/latest/src/signature/dsa.html?highlight=ECDSA
+* RFC 8017 requires RSASSA-PSS over RSASSA-PKCS1-v1_5 in new applications
+* "ECDSA is probabilistic in a bad way, where random generation is vital to the security of the signature.": https://www.scottbrady91.com/jose/jwts-which-signing-algorithm-should-i-use
+    * So let's use RSA-PSS instead, and use different keys for signing than for encryption.
+
+CA:
+* CA must verify Alice's identity out of band, simplify by assuming unique usernames?
+* About certificate information (lecture 10, slide 27)
+* Standard: X.509 (lecture 10, slide 32)
+
+Messages from patient -> audit server:
+* Use PGP style authentication, integrity & encryption scheme
+    * Signing algorithm: ECDSA
+    * Encryption algorithm: AES GCM mode
+
+Authenticated encryption:
+* Use GCM:
+"""
+import json
+from base64 import b64encode
+from Crypto.Cipher import AES
+from Crypto.Random import get_random_bytes
+
+header = b"header"
+data = b"secret"
+key = get_random_bytes(32)
+key = get_random_bytes(16)
+cipher = AES.new(key, AES.MODE_GCM)
+cipher.update(header)
+ciphertext, tag = cipher.encrypt_and_digest(data)
+json_k = ["nonce", "header", "ciphertext", "tag"]
+nonce = cipher.nonce
+print(len(nonce.hex()))
+json_v = [
+    b64encode(x).decode("utf-8") for x in [nonce, header, ciphertext, tag]
+]
+result = json.dumps(dict(zip(json_k, json_v)), indent=2)
+print(result)
+"""
+
 Questions:
 * Should audit companies only be allowed to query data?
 * Does a user have multiple EHR records or just one?

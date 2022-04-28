@@ -103,7 +103,7 @@ paths:
         "200":
           description: "successful operation"
   /ehr/list/{patient_id}:
-    post:
+    get:
       tags:
       - "EHR"
       summary: "List all EHRs belonging to the patient"
@@ -118,7 +118,7 @@ paths:
         "200":
           description: "A list of EHR IDs"
   /ehr/get/{patient_id}/{record_id}:
-    post:
+    get:
       tags:
       - "EHR"
       summary: "Fetch an existing EHR"
