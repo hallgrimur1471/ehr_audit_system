@@ -9,3 +9,15 @@ This repository is a prototype of a Electronic health record (EHR) system. All a
 5. **Decentralization**: The system should not rely on a single trusted entity to support immutability.
 
 This project and the system goals was specified by my instructor in the course CSCI531 at USC as a final project of the course.
+
+## Install
+
+```
+cd code
+python3 -m venv .venv
+source .venv/bin/activate
+python3 -m pip install -r requirements.txt
+python3 -m pip install -r requirements_dev.txt
+cd ehr_server
+python3 -m pip install -e .
+```

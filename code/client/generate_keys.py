@@ -1,12 +1,10 @@
 #!/usr/bin/env python3
 
-import os
-import math
-import json
-import random
 import logging
 import argparse
 from pathlib import Path
+
+from Crypto.PublicKey import RSA
 
 
 def main():
@@ -17,22 +15,45 @@ def main():
     else:
         configure_logger(logging.INFO)
 
-    generate_keys(args.USER)
+    generate_keys()
 
 
-def generate_keys(user):
-    pass
+def generate_keys():
+    generate_encryption_decryption_keys()
+    generate_sign_verify_keys()
+
+
+def generate_encryption_decryption_keys():
+    generate_rsa_keys(2048, "sign.pem", "verify.pem")
+
+
+def generate_sign_verify_keys():
+    generate_rsa_keys(2048, "encrypt.pem", "decrypt.pem")
+
+
+def generate_rsa_keys(size_bits, private_key_filename, public_key_filename):
+    keypair = RSA.generate(size_bits)
+
+    # Export private key
+    with open(private_key_filename, "wb") as f:
+        f.write(keypair.export_key(format="PEM"))
+
+    # Export public key
+    with open(public_key_filename, "wb") as f:
+        f.write(keypair.public_key().export_key(format="PEM"))
+
+    logging.info(
+        f"RSA keypair generated. Private key: '{private_key_filename}', "
+        + f"public key: '{public_key_filename}'"
+    )
 
 
 def parse_arguments():
     parser = argparse.ArgumentParser()
     parser.description = (
-        "Generate Two sets of RSA public and private keys, "
+        "Generate two sets of RSA public and private keys, "
         + "one set for signing and verification, "
         + "the other set of encryption an decryption."
-    )
-    parser.add_argument(
-        "USER_ID", help="The name of the user for whom the keys will be generated."
     )
     parser.add_argument(
         "-v",
