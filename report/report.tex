@@ -141,6 +141,20 @@
 
 		PEM key format:
 		*'PEM'*. (*Default*) Text encoding, done according to `RFC1421`_/`RFC1423`_.
+
+		The reason for timestamp is to make sure adversary can't do replay attack constantly and see how ciphertext grows (they might learn a visit to the doctor happened).
+
+		Instead of doing authentication inside the TLS channel, the TLS channel can be configured to use client keys as well, that would have been another option.
+
+		Authenticating clients: TLS client cert vs application level authentication
+		* TLS:
+			* Built-in replay attack protection
+			* Needs generation of certificates & ngnix config
+		* Application level
+			* Need to implement replay attack protection somehow (some timestamp shenanigans?)
+			* More complex code
+		
+		Better programming to do the TLS stuff in Ngnix and connect to Flask through Gunicorn or similar WSGI.
 		
 		\section{Introduction}
 

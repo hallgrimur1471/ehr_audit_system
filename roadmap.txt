@@ -47,6 +47,40 @@ Messages from patient -> audit server:
     * Signing algorithm: ECDSA
     * Encryption algorithm: AES GCM mode
 
+TLS mutual authentication:
+```
+# based on:
+#    https://www.electricmonk.nl/log/2018/06/02/ssl-tls-client-certificate-verification-with-python-v3-4-sslcontext/
+#    https://gist.github.com/nebulak/6d865ddd768fb905a562d6026cdd508a
+
+# CA
+openssl genrsa -out FlexCA.key 2048
+# Probably should not be example.com here:
+openssl req -x509 -new -nodes -key FlexCA.key -sha256 -days 1024 -out FlexCA.pem -subj "/C=US/ST=Denial/L=Springfield/O=Dis/CN=certificateauthority.com"
+
+# Client
+openssl genrsa -out FlexClient.key 2048
+openssl req -new -key FlexClient.key -out FlexClient.csr -subj "/C=US/ST=Denial/L=Springfield/O=Dis/CN=clientdomain"
+openssl x509 -req -in FlexClient.csr -CA FlexCA.pem -CAkey FlexCA.key -CAcreateserial -out FlexClient.pem -days 1024 -sha256
+
+# Server
+openssl req -new -key server.key -out server.csr -subj "/C=US/ST=Denial/L=Springfield/O=Dis/CN=example.com"
+openssl x509 -req -in server.csr -CA FlexCA.pem -CAkey FlexCA.key -CAcreateserial -out server.crt -days 1024 -sha256
+
+# Edit /etc/hosts to include the line:
+127.0.0.1    example.com
+
+# Send request to server:
+curl --cacert FlexCA.pem --cert FlexClient.pem --key FlexClient.key https://example.com:5000
+
+# Seems to only support TLSv1.2 and TLSv1.3, test:
+openssl s_client -CAfile FlexCA.pem -cert FlexClient.pem -key FlexClient.key -connect example.com:5000 -tls1_3
+openssl s_client -CAfile FlexCA.pem -cert FlexClient.pem -key FlexClient.key -connect example.com:5000 -tls1_2
+openssl s_client -CAfile FlexCA.pem -cert FlexClient.pem -key FlexClient.key -connect example.com:5000 -tls1_1
+openssl s_client -CAfile FlexCA.pem -cert FlexClient.pem -key FlexClient.key -connect example.com:5000 -tls1
+# https://www.howtouselinux.com/post/ssl-vs-tls-and-how-to-check-tls-version-in-linux#:~:text=OpenSSL%20command%20is%20the%20easiest,host.com%3A443%20%2Dtls1_1
+```
+
 Authenticated encryption:
 * Use GCM:
 """
