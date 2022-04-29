@@ -73,13 +73,27 @@ openssl x509 -req -in server.csr -CA FlexCA.pem -CAkey FlexCA.key -CAcreateseria
 # Send request to server:
 curl --cacert FlexCA.pem --cert FlexClient.pem --key FlexClient.key https://example.com:5000
 
-# Seems to only support TLSv1.2 and TLSv1.3, test:
 openssl s_client -CAfile FlexCA.pem -cert FlexClient.pem -key FlexClient.key -connect example.com:5000 -tls1_3
 openssl s_client -CAfile FlexCA.pem -cert FlexClient.pem -key FlexClient.key -connect example.com:5000 -tls1_2
 openssl s_client -CAfile FlexCA.pem -cert FlexClient.pem -key FlexClient.key -connect example.com:5000 -tls1_1
 openssl s_client -CAfile FlexCA.pem -cert FlexClient.pem -key FlexClient.key -connect example.com:5000 -tls1
 # https://www.howtouselinux.com/post/ssl-vs-tls-and-how-to-check-tls-version-in-linux#:~:text=OpenSSL%20command%20is%20the%20easiest,host.com%3A443%20%2Dtls1_1
 ```
+
+patient keys:
+* TLS keys, RSA encryption_decryption keys
+
+audit company keys:
+* TLS keys, RSA encryption_decryption keys
+
+ehr_server keys:
+* TLS keys (server.key, server.crt)
+
+audit_server keys:
+* TLS keys (server.key, server.crt)
+
+certificate_authority keys:
+* ca.key, ca.crt
 
 Authenticated encryption:
 * Use GCM:
