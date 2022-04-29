@@ -208,5 +208,184 @@
     "requested_by": "unknown",
     "action": "CREATE",
     "ehr_id": "211522d8e52544d753f8a6245f6f9196"
+  },
+  {
+    "time": "2022-04-29 23:05:41",
+    "patient": "alice",
+    "requested_by": "unknown",
+    "action": "CREATE",
+    "ehr_id": "2bb4351d723912022698624216ce9131"
+  },
+  {
+    "time": "2022-04-29 23:08:05",
+    "patient": "alice",
+    "requested_by": "unknown",
+    "action": "CREATE",
+    "ehr_id": "ce471df987291677f8e59cb1b5cf5f86"
+  },
+  {
+    "time": "2022-04-29 23:08:34",
+    "patient": "alice",
+    "requested_by": "unknown",
+    "action": "CREATE",
+    "ehr_id": "d14a4c9a4087624ce370814bf06531c1"
+  },
+  {
+    "time": "2022-04-29 23:09:56",
+    "patient": "alice",
+    "requested_by": "unknown",
+    "action": "CREATE",
+    "ehr_id": "72edfc271839d2609b038dbb5c3e329a"
+  },
+  {
+    "time": "2022-04-29 23:10:13",
+    "patient": "alice",
+    "requested_by": "unknown",
+    "action": "CREATE",
+    "ehr_id": "670637faccca547359ec22c2506a5179"
+  },
+  {
+    "time": "2022-04-29 23:10:26",
+    "patient": "alice",
+    "requested_by": "unknown",
+    "action": "CREATE",
+    "ehr_id": "07abc3200144728c8878902b6ab4a27a"
+  },
+  {
+    "time": "2022-04-29 23:10:27",
+    "patient": "alice",
+    "requested_by": "unknown",
+    "action": "CREATE",
+    "ehr_id": "7ea2016bd8ea5978c52e3a65817ab023"
+  },
+  {
+    "time": "2022-04-29 23:10:37",
+    "patient": "alice",
+    "requested_by": "unknown",
+    "action": "CREATE",
+    "ehr_id": "300d79acaa521e95a20f32dc52cf5965"
+  },
+  {
+    "time": "2022-04-29 23:11:11",
+    "patient": "alice",
+    "requested_by": "unknown",
+    "action": "CREATE",
+    "ehr_id": "23ff77318898d3be5e90b6b80463c3c1"
+  },
+  {
+    "time": "2022-04-29 23:24:36",
+    "patient": "alice",
+    "requested_by": "mark",
+    "action": "CREATE",
+    "ehr_id": "befccdda4a5504364544cf7bca63b0cf"
+  },
+  {
+    "time": "2022-04-29 23:24:40",
+    "patient": "alice",
+    "requested_by": "mark",
+    "action": "CREATE",
+    "ehr_id": "e5b64754969f9bc687d04720175aebe0"
+  },
+  {
+    "time": "2022-04-29 23:24:50",
+    "patient": "alice",
+    "requested_by": "mark",
+    "action": "CREATE",
+    "ehr_id": "6f54bbb61322629c2834b5ffa42a0a56"
+  },
+  {
+    "time": "2022-04-29 23:36:51",
+    "patient": "alice",
+    "requested_by": "mark",
+    "action": "CREATE",
+    "ehr_id": "f764b7595b74a1d02d3af9f8a2642b8f"
+  },
+  {
+    "time": "2022-04-29 23:42:52",
+    "patient": "alice",
+    "requested_by": "mark",
+    "action": "CREATE",
+    "ehr_id": "73a6259260e4237019e1422c7b31adb0"
+  },
+  {
+    "time": "2022-04-29 23:43:16",
+    "patient": "alice",
+    "requested_by": "john",
+    "action": "DELETE",
+    "ehr_id": "73a6259260e4237019e1422c7b31adb0"
+  },
+  {
+    "time": "2022-04-29 23:47:37",
+    "patient": "alice",
+    "requested_by": "mark",
+    "action": "CREATE",
+    "ehr_id": "dee291db65e4cf73ca02c152468cc674"
+  },
+  {
+    "time": "2022-04-29 23:48:06",
+    "patient": "alice",
+    "requested_by": "mark",
+    "action": "CHANGE",
+    "ehr_id": "dee291db65e4cf73ca02c152468cc674"
+  },
+  {
+    "time": "2022-04-29 23:48:10",
+    "patient": "alice",
+    "requested_by": "mark",
+    "action": "CHANGE",
+    "ehr_id": "dee291db65e4cf73ca02c152468cc674"
+  },
+  {
+    "time": "2022-04-29 23:48:14",
+    "patient": "alice",
+    "requested_by": "mark",
+    "action": "CHANGE",
+    "ehr_id": "dee291db65e4cf73ca02c152468cc674"
+  },
+  {
+    "time": "2022-04-29 23:53:06",
+    "patient": "alice",
+    "requested_by": "john",
+    "action": "GET_RECORD",
+    "ehr_id": "dee291db65e4cf73ca02c152468cc674"
+  },
+  {
+    "time": "2022-04-29 23:53:34",
+    "patient": "alice",
+    "requested_by": "john",
+    "action": "GET_RECORD",
+    "ehr_id": "dee291db65e4cf73ca02c152468cc674"
+  },
+  {
+    "time": "2022-04-29 23:55:20",
+    "patient": "alice",
+    "requested_by": "john",
+    "action": "GET_RECORDS"
+  },
+  {
+    "time": "2022-04-29 23:55:25",
+    "patient": "bob",
+    "requested_by": "john",
+    "action": "GET_RECORDS"
+  },
+  {
+    "time": "2022-04-29 23:56:28",
+    "patient": "alice",
+    "requested_by": "john",
+    "action": "GET_RECORD",
+    "ehr_id": "dee291db65e4cf73ca02c152468cc674"
+  },
+  {
+    "time": "2022-04-29 23:56:30",
+    "patient": "alice",
+    "requested_by": "john",
+    "action": "GET_RECORD",
+    "ehr_id": "dee291db65e4cf73ca02c152468cc674"
+  },
+  {
+    "time": "2022-04-29 23:57:05",
+    "patient": "bob",
+    "requested_by": "john",
+    "action": "GET_RECORDS"
   }
 ]

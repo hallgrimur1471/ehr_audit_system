@@ -1,3 +1,7 @@
 report/*.pdf binary
 *.png binary
 *.jpg binary
+*.json binary
+*.pem binary
+*.crt binary
+*.key binary

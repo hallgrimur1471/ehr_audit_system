@@ -155,6 +155,18 @@
 			* More complex code
 		
 		Better programming to do the TLS stuff in Ngnix and connect to Flask through Gunicorn or similar WSGI.
+
+		Name of doctor can be anything and is not verified, because it's not the focus of this project.
+
+		doctor client examples:
+
+		```
+		python3 ehr.py CREATE alice mark -d 'Visit 8'
+		python3 ehr.py DELETE alice john --ehr-id 73a6259260e4237019e1422c7b31adb0
+		python3 ehr.py CHANGE alice mark --description 'Visit 8' --ehr-id dee291db65e4cf73ca02c152468cc674
+		python3 ehr.py GET_RECORD alice john --ehr-id dee291db65e4cf73ca02c152468cc674
+		python3 ehr.py GET_RECORDS bob john
+		```
 		
 		\section{Introduction}
 
