@@ -1,0 +1,2 @@
+[console_scripts]
+audit_server = audit_server.server:run

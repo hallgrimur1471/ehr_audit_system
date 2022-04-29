@@ -2,12 +2,12 @@ import logging
 import json
 from pathlib import Path
 
-from ehr_server.audit import AuditRecord
-from ehr_server.database import DBEditor
+from audit_server.audit_record import AuditRecord
+import audit_server.database
 
 log = logging.getLogger("ehr_server.server")
 
-DB_FILE = Path("/home/david1471/ehr_audit_system/code/server/audit_db.json")
+DB_FILE = Path("/home/david1471/ehr_audit_system/code/audit_server/audit_db.json")
 
 
 def initialize():
@@ -22,5 +22,5 @@ def initialize():
 
 
 def add_record(record: AuditRecord):
-    with DBEditor(DB_FILE) as db:
+    with audit_server.database.DBEditor(DB_FILE) as db:
         db.append(json.loads(str(record)))

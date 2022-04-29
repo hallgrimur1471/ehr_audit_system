@@ -1,0 +1,17 @@
+Metadata-Version: 2.1
+Name: audit-server-drvn
+Version: 0.0.1
+Summary: Server for querying EHR audit data
+Home-page: https://github.com/hallgrimur1471/ehr_audit_system/tree/master/code/audit_server
+Author: Hallgrimur David Egilsson
+Author-email: author@example.com
+License: UNKNOWN
+Project-URL: Bug Tracker, https://github.com/hallgrimur1471/ehr_audit_system/issues
+Platform: UNKNOWN
+Classifier: Programming Language :: Python :: 3
+Classifier: Operating System :: OS Independent
+Requires-Python: >=3.9
+Description-Content-Type: text/markdown
+
+UNKNOWN
+
