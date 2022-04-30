@@ -60,7 +60,7 @@ def ehr_server_post_request(doctor, url_path, description=None):
             logging.info(response_text.rstrip())
     except HTTPError as err:
         logging.error(
-            f"Failed to create record, ehr_server responded with: {err.read().decode().rstrip()}"
+            f"Action failed, ehr_server responded with: {err.read().decode().rstrip()}"
         )
 
 
@@ -75,7 +75,7 @@ def ehr_server_get_request(url_path):
             print(response_text.rstrip())
     except HTTPError as err:
         logging.error(
-            f"Failed to create record, ehr_server responded with: {err.read().decode().rstrip()}"
+            f"Action failed, ehr_server responded with: {err.read().decode().rstrip()}"
         )
 
 
