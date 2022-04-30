@@ -1,0 +1,38 @@
+[
+    // db_entry:
+    {
+        "patient_entry_enc": "...",
+        "patient_entry_key_enc": "...",
+        "entry_key_enc_signature": "..."
+    },
+    // patient_entry:
+    {
+        "patient": "alice",
+        "key_enc": "kVzTq9eImN+NbG7rERClUt1afzzCI1JRrFqWZmMOBZFdOck7gJ+hcAAqNzoUdkgr++fPQz67W72e58m+PcxP5Je7uR6uiAhx278u5BcScQ/ksj55weR3LAKPIOO/jIBqotl5Knik9Q2vdeBzeyBtXP3Ijed/0hP1QO4nAEGg21S7XGgPB6Gj+3KrKaTcG0F4+K1apLQHR5Socjf83Bky+IO0789uf6PPRkaQ3sAR2gDWJRBerZHvoEYpyY6K8Gj4JbRYQS9kxbMwDteIb7xce24Vh/v6gP4Eh6TevT6HYPmffCvs8YPtM8GJ2s+na7yvKFWhji8He1B3cH36LCgQ5g==",
+        "key_enc_for_audit_company": "PjCB7hkKnyYczvBzxFZP9SE0sJIgpC2Ovymdn9WeutUT2IYmC7oZJlBf/LlhcbzXV5nYKSoTPSKJGL4umFx5Kt71eey4dVZwQLvIfcruysUzAjnPtViMCaMGGxQVgEAKQboALVBwsFLDJrhyPhuVRYGUDl4g80nZ6UHcIWulDbJu1Y1oEQlb7h2iR0MkDDZxTdwFy6mrZFSIZ6ZSdQkdcAK01/kQSfAgaCqVK+gagSaTxePXqTRKpwhgNzG6cKGZFQ7bY7ZsLk7a+MQOUC56buRIMuWcsinmDkZVr9htq/Rtd0YIVjj6Yqtk98hpBJba73O3f6hZfOVs4fuQHgSE4g==",
+        "ehr_action_enc": {
+            "ciphertext": "PhBgpqR2cLL4RIyPh4oHe/fru2ZJhRM2P6V7KJIozLbOGnlPTaL/nb/1opnbgPqrUjzPPcVyxLh0YdcG2pXhCX4hL/2X6RI0Nm1syKGy7JaaOg4+Dhyy4ZKonBX4HqKtzseibeXvaUIlEgfmZZ0Mtcmvl7pdG2hTqSBMF2uSrzaw2DvLV3pYV14cOtJAjEMmOrMcbFvzJtmm",
+            "tag": "GDbNRQ8u4nMBH8Ax9YN5Dg=="
+        }
+    },
+    {
+        "patient_enc": {
+            "ciphertext": "...",
+            "ciphertext_tag": "...",
+            "key_enc": "...", // encrypted with audit_server's public key
+            "key_enc_signature": "..." // signed by audit_server
+        },
+        "ehr_action_enc": {
+            "ciphertext": "...",
+            "ciphertext_tag": "...",
+            "for_patient": {
+                "key_enc": "...", // encrypted with patient's public key
+                "key_enc_signature": "..." // signed by audit_server
+            },
+            "for_audit_company": {
+                "key_enc": "...", // encrypted with audit company's public key
+                "key_enc_signature": "..." // signed by audit_server
+            }
+        }
+    }
+]

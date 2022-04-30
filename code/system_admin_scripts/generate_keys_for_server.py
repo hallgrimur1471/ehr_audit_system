@@ -16,29 +16,32 @@ def main():
     else:
         configure_logger(logging.INFO)
 
-    generate_tls_for_domain(args.SERVER_DOMAIN)
+    generate_keys(args.SERVER_ID)
 
 
-def generate_tls_for_domain(server_domain):
-    key_dir = Path(__file__).parent.absolute() / "keys"
+def generate_keys(server_id):
+    key_dir = Path(__file__).parent.absolute() / f"keys/{server_id}"
     ca_dir = Path(__file__).parent.parent.absolute() / "ca/keys"
 
-    key_dir.mkdir(exist_ok=True)
+    key_dir.mkdir(exist_ok=True, parents=True)
 
-    generate_tls_keys(server_domain, key_dir, ca_dir)
+    generate_tls_keys(server_id, key_dir, ca_dir)
+    generate_encryption_decryption_keys(server_id, key_dir)
+    generate_sign_verify_keys(server_id, key_dir)
 
 
-def generate_tls_keys(server_domain, key_dir, ca_dir):
-    server_key_filename = f"{server_domain}_tls.key"
-    server_csr_filename = f"{server_domain}_tls.csr"  # csr: certificate signing request
-    server_cert_filename = f"{server_domain}_tls.crt"
+def generate_tls_keys(server_id, key_dir, ca_dir):
+    user_key_filename = f"tls.key"
+    user_csr_filename = f"tls.csr"  # csr: certificate signing request
+    user_cert_filename = f"tls.crt"
+    user_domain = server_id
 
     ca_key_path = ca_dir / "ca.key"
     ca_cert_path = ca_dir / "ca.crt"
 
-    logging.info("Generating server TLS key ...")
+    logging.info("Generating user TLS key ...")
     subprocess.run(
-        f"openssl genrsa -out {server_key_filename} 2048",
+        f"openssl genrsa -out {user_key_filename} 2048",
         shell=True,
         check=True,
         cwd=key_dir,
@@ -46,39 +49,70 @@ def generate_tls_keys(server_domain, key_dir, ca_dir):
 
     logging.info("Creating a certificate signing request ...")
     subprocess.run(
-        f"openssl req -new -key {server_key_filename} -out {server_csr_filename} "
-        + f'-subj "/C=US/ST=Denial/L=Springfield/O=Dis/CN={server_domain}"',
+        f"openssl req -new -key {user_key_filename} -out {user_csr_filename} "
+        + f'-subj "/C=US/ST=Denial/L=Springfield/O=Dis/CN={user_domain}"',
         shell=True,
         check=True,
         cwd=key_dir,
     )
 
-    logging.info("Creating server certificate ...")
+    logging.info("Creating user certificate ...")
     subprocess.run(
-        f"openssl x509 -req -in {server_csr_filename} -CA {ca_cert_path} "
+        f"openssl x509 -req -in {user_csr_filename} -CA {ca_cert_path} "
         + f"-CAkey {ca_key_path} -CAcreateserial "
-        + f"-out {server_cert_filename} -days 1024 -sha256",
+        + f"-out {user_cert_filename} -days 1024 -sha256",
         shell=True,
         check=True,
         cwd=key_dir,
     )
 
-    # Now since server's certificate has been signed by the CA, the csr can be deleted
-    subprocess.run(f"rm {server_csr_filename}", shell=True, check=True, cwd=key_dir)
+    # Now since user's certificate has been signed by the CA, the csr can be deleted
+    subprocess.run(f"rm {user_csr_filename}", shell=True, check=True, cwd=key_dir)
 
     logging.info(
         "TLS key and cert generated. "
-        + f"Private key: '{server_key_filename}', "
-        + f"certificate: '{server_cert_filename}'"
+        + f"Private key: '{user_key_filename}', "
+        + f"certificate: '{user_cert_filename}'"
+    )
+
+
+def generate_encryption_decryption_keys(server_id, key_dir):
+    private_key_filename = f"rsa_encrypt.pem"
+    public_key_filename = f"rsa_decrypt.pem"
+    generate_rsa_keys(2048, private_key_filename, public_key_filename, key_dir)
+
+
+def generate_sign_verify_keys(server_id, key_dir):
+    private_key_filename = f"rsa_sign.pem"
+    public_key_filename = f"rsa_verify.pem"
+    generate_rsa_keys(2048, private_key_filename, public_key_filename, key_dir)
+
+
+def generate_rsa_keys(size_bits, private_key_filename, public_key_filename, key_dir):
+    keypair = RSA.generate(size_bits)
+
+    # Export private key
+    with open(key_dir / private_key_filename, "wb") as f:
+        f.write(keypair.export_key(format="PEM"))
+
+    # Export public key
+    with open(key_dir / public_key_filename, "wb") as f:
+        f.write(keypair.public_key().export_key(format="PEM"))
+
+    logging.info(
+        f"RSA keypair generated. Private key: '{private_key_filename}', "
+        + f"public key: '{public_key_filename}'"
     )
 
 
 def parse_arguments():
     parser = argparse.ArgumentParser()
-    parser.description = "Generate a TLS key and cert signed by a CA for a server"
-    parser.add_argument(
-        "SERVER_DOMAIN", type=str, help="Server to generate TLS key and cert for"
+    parser.description = (
+        "Generate 2 RSA keypairs for a server, "
+        + "one for encryption/decryption the other for signing/verifying. "
+        + "Additionally a TLS key and cert signed by a CA are generated."
     )
+    parser.add_argument("SERVER_ID", type=str, help="Server to generate keys for")
     parser.add_argument(
         "-v",
         "--verbose",
