@@ -10,7 +10,7 @@ from ehr_server.time import TIME_FORMAT
 
 log = logging.getLogger("ehr_server.server")
 
-DB_FILE = Path("/home/david1471/ehr_audit_system/code/ehr_server/ehr_db.json")
+DB_FILE = Path(__file__).absolute().parent.parent.parent / "ehr_db.json"
 
 
 def initialize():

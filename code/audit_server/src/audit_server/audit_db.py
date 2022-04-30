@@ -7,7 +7,7 @@ from audit_server.database import DBEditor, DBReader
 
 log = logging.getLogger("ehr_server.server")
 
-DB_FILE = Path("/home/david1471/ehr_audit_system/code/audit_server/audit_db.json")
+DB_FILE = Path(__file__).absolute().parent.parent.parent / "audit_db.json"
 
 
 def initialize():
