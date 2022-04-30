@@ -170,17 +170,24 @@
 
 		There is authorization check at https://audit_server:5001/log_action, only ehr_server can call it.
 		```
-		$ curl -X POST --cacert ca/keys/ca.crt --cert audit_client/keys/bob/tls.crt --key audit_client/keys/bob/tls.key https://audit_server:5001/log_action
+		curl -X POST --cacert ca/keys/ca.crt --cert audit_client/keys/bob/tls.crt --key audit_client/keys/bob/tls.key https://audit_server:5001/log_action
 		bob is not authorized to log EHR actions(.venv) david1471@arch:~/ehr_audit_system/code
-		$ curl -X POST --cacert ca/keys/ca.crt --cert audit_client/keys/bob/tls.crt --key audit_client/keys/bob/tls.key https://audit_server:5001/log_action
+		curl -X POST --cacert ca/keys/ca.crt --cert audit_client/keys/bob/tls.crt --key audit_client/keys/bob/tls.key https://audit_server:5001/log_action
 		bob is not authorized to log EHR actions
 		(.venv) david1471@arch:~/ehr_audit_system/code
-		$ curl -X POST --cacert ca/keys/ca.crt --cert ehr_server/keys/ehr_server_tls.crt --key ehr_server/keys/ehr_server_tls.key https://audit_server:5001/log_action
+		curl -X POST --cacert ca/keys/ca.crt --cert ehr_server/keys/ehr_server_tls.crt --key ehr_server/keys/ehr_server_tls.key https://audit_server:5001/log_action
 		<!doctype html>
 		<html lang=en>
 		<title>400 Bad Request</title>
 		<h1>Bad Request</h1>
 		<p>Did not attempt to load JSON data because the request Content-Type was not &#x27;application/json&#x27;.</p>
+		```
+
+		Username can't be to long, otherwise RSA PKCS#1 OAEP breaks because encrypted message will become to large
+
+		System admin commands:
+		```
+		for user in alice bob carol david eve usc ucla; do cp audit_client/keys/${user}/rsa_encrypt.pem audit_server/keys/known_pubkeys/${user}/
 		```
 		
 		\section{Introduction}

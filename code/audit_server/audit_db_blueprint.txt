@@ -1,0 +1,26 @@
+{
+    "patient_and_key_enc": {"patient": "alice", "key": "asdf"},
+    "patient_and_key_enc_signature": "H(E(patient_and_key_enc)) should be X, signed by audit_server",
+    "patient_and_key_enc_for_audit_company": {"patient": "alice", "key": "asdf"},
+    "patient_and_key_enc_for_audit_company_signature": "H(E(patient_and_key_enc)) should be X, signed by audit_server"
+    "record_enc": {
+        "time": "2022-04-30 17:25:47",
+        "patient": "alice",
+        "requested_by": "mark",
+        "action": "CREATE",
+        "ehr_id": "df767b8aa7540f9848249284babf2fef"
+    }
+},
+{
+    "patient_and_key_enc": {"patient": "alice", "key": "asdf"},
+    "patient_and_key_enc_signature": "H(E(patient_and_key_enc)) should be X, signed by audit_server",
+    "patient_and_key_enc_for_audit_company": {"patient": "alice", "key": "asdf"},
+    "patient_and_key_enc_for_audit_company_signature": "H(E(patient_and_key_enc)) should be X, signed by audit_server"
+    "record_enc": {
+        "ciphertext": "...",
+        "tag": "..."
+    }
+}
+// record_enc = AES_GCM(Ks, record)
+// patient_enc = RSA_PKCS1_OAEP(Pka, "alice")
+// patient_enc_for_audit_company = RSA_PKCS1_OAEP(Pke, "alice")

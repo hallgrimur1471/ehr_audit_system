@@ -21,9 +21,9 @@ def initialize():
         DB_FILE.write_text("[]\n")
 
 
-def add_record(record: AuditRecord):
+def add_record(record: dict):
     with DBEditor(DB_FILE) as db:
-        db.append(json.loads(str(record)))
+        db.append(record)
 
 
 def get_records(user):

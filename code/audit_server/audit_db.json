@@ -401,5 +401,52 @@
     "requested_by": "johnny",
     "action": "CREATE",
     "ehr_id": "df767b8aa7540f9848249284babf2fef"
+  },
+  {
+    "time": "2022-04-30 19:17:29",
+    "patient": "alice",
+    "requested_by": "mark",
+    "action": "CREATE",
+    "ehr_id": "b93f804548ad901eaf93ae20d78e21a1"
+  },
+  {
+    "record_enc": {
+      "ciphertext": "Lv6DI7n0oYabFQkUi/XGEnd3155ItPHk19uYUiyknYXdD2krcVm2NAS8jMBTeyM9KBC2ogAWxyIOvyk9EZ19OcXtqU/T+gOO5DMM7x4Z7Oj2MbULt6NXWoL4fKMVs5MI/701XGz4gEU8NWpf/AUR2TFZtCCa4Xm7zpIHXnxIXIM9ockmM/Lr+JyZF3LQiz5f5aA0d7SmVzTW",
+      "tag": "CPx5ZrdluXvZ2bbzeHfpdQ=="
+    },
+    "patient_and_key_enc": "LlW0RWdFe/BC1qRZkJJwedsOkIFWj0YuN87LrFjVadrEhsHO9OUuEP7UASkj+mFhNx4+29FME++gPGsZlctqJ7tpqYYlQnByGiAnBn0/IxzVTnC4u9BYZeTa/i3yY9omN2deS5vToO2/u/XwCbAT/pbmWsUPzDjRxkZVD5a6J6EMoqzRt3nJoy4LpDw9PnZpYMcFkE211Kpgw7xNH4DRn3nueJL0GBQSGHLEd0RyGCDP55+rJ1HcGZCfwHkP+awtbjDHg0FBJZHSvF2UyVF70mFRsRetYkdjoZyLv71D2pX/3NRv7KGAnEzgvxHMztRwBxC5zx9YDlSjCo4cXSJuCQ==",
+    "patient_and_key_enc_for_audit_company": "gSMv9sQ1h8FNx/yMvHbuNbOfFaH1U+9HamBRwfQ/3nF2OcjPSSo5cP1u0mxFa7nN2WFcaBzEkjipQDHc0BfO2nsvKDJ+4rdlf/IIVaBk5SoQGAIuEjOYZ2KH1LPd35rXox/0veJUUmSneAQiM6kooxm0QHM5dkq4XFTOhX2bOnHajMXESFcN2Lk7vZnlgfAwV1sBRx0HQX4ca/ODhtpOKwcm8/AF70NwX5y7Z3hgylEdG3ZV8JplnOTFEJpAOAxS6FN/EsqKCbi7G8gJrR1YRpQh8cUyzksGLOuRrMxooh/UIwIhcNbXvPF5A+WhqnJuJQcWL3hmDzydwbx/Cjr+gg=="
+  },
+  {
+    "record_enc": {
+      "ciphertext": "4sCf63+7XiAuZ4vTavuluL6Nca61idKjkPMo6GNqCpnhMmFZBQs+iwYxQQKlqkt+UW4hH13mJ0+eEd+s2fUjaER5ONDqh4+IwR1qKkNtLFyAZLlfAvGfbN9vA50Ue0/UUtA1UCE8eW616wxHpDCEyIl8b1w4FlmBvATam1EEAOe6jkhFvCX+hkshntuexuT9IWD4WnfRfn+X",
+      "tag": "LhjzYqTv3KKK9vKCxgBYCg=="
+    },
+    "patient_and_key_enc": "GbRQa2ZVbZTdiWscuKZfgoMbTRFZVIuiiRu3+CXSn12KPCN8clgjYXEsfpJ7nOBCXa6ECeNJLYDOlJavMyPUXVCtInrBO0dGCCT7nGSGwp51KKPjg+qE/igyOrKhdVntgBXFwtjxnUn6nB94A58EEs/YxDdl2erOoUz0KkbJeAQQnSUZ3cRd92+4bLlRK7CPnckB8F1ARXic+jZ7ruWVGCcb2+DChmieGO5RYqVx2VGEd0dfv4v9tCUewLWJ/mU5NkA2dyu7JTIBjOC6tTrXya/tx3Ser7zz6Vtg6ox/H5GUHgNT8cPYKE2gBYmrLjJqoZME1TCpc8JpGWDO3I4htA==",
+    "patient_and_key_enc_for_audit_company": "E97Aj6B7jSeME2KO9RnNyetaKWtgTiSQqwDqfUIzy8Ppp5zc/8iFYPsZG1AEVKS/KtSbJgZPjvpNWh/Xf/urVcoyKGr/2VoTvmj2OaRDEaQfodOQeKXAAWCYZO9gE6C2GwLNsw5ypVILv+RQTy9HNqDsjJTWPdcVYqC7OkshNS3zQrjVEuvVIQ/ZNyUqIaJsmtkO8oBn7s3odY9k+PuLWXrlDYvxhyZO9EtjQxfS2n5DoDkWTNWYx5Yn7uNTGwlRxsoMzJML2PY3lenCP9isc3/uMDlYMsuCatnB/TFD5nYK3Ku8qPzD3Ors6rxzDpd2RemaeAMcdms4O3nPTFwsJQ=="
+  },
+  {
+    "record_enc": {
+      "ciphertext": "rgyS4jyrIO6BbLRairlotCZoIp1v4zwYsee4EmhDdcLijk9oPD69cmpJ/AOTcfMzCzH4OXsaFdtzOed+TqhC0wYFET2TNqMNGAuRZFz/W62rcnGy4Qeo24RhnvAokKPkKvvT9et0gqQSsk5DvimTZhzVOGyHaIh+IrqnzkPlR6dW/nSNXND1zJsN+dM0TIQbPMkVj5VFWkkr",
+      "tag": "ThJIwgRjWy+qKUJKCH0D+A=="
+    },
+    "patient_and_key_enc": "htXOU+nuLhSB079TuFSaQk1JOJQRSdHt6YFulgDbpHbztvDneCrF2kc5X50Dqo3++xETuChyaaoylMzPvSd+zkT0igbFJ5uYDv9QrODKCSZfUYd4R5qtxEa1eCgYoPgdcoUbwlAvK3sKrLrHSphz5P6WKzAnedSX3TgwYyc7CceeSRq/Rpi77GRrTGkY9T1fHfmKY5+URlkuhXthuvyd4Pta+/OEDWn0WW8hay+Xr0uzyk2/4P79DSdoPsgh4mH1i27O9ofpvNCkhHa50IobEIXXosmduYvboV1kcUVCk8yz79K0Nbcqv7W6PMwg0jjw7pLOzALwlWc8km1+E2Gz5A==",
+    "patient_and_key_enc_for_audit_company": "GeqHTLCUtOlPiBlGNxotY41Uq+yAB0wBrOlkXW9V2y7QTFWlHvDUzd2lvT8mw0awn6xjIDYZWPF2visMRtlz/6Bv4diEXXnq0FfQ88pCjYEonJj0NUvLpWG05cCfpBJX+pZntAuQYqKslxochtATSog4AzEuVmNNg+aFjL37aZALzsnYrEN0Rsd7e4pjpCuZij3BLPK6+dqE3gtGR8TYlsKPR96z+CPCGIyvoxvtWQxuWt0fjMqSCzn4FLzPiwQr4OaKxKeKVk5XtN3WbeUn0csuH473GzMHupjMOXTLBoxoFzkkXcAjOtECnYZ8gBNimMl1IF9sx1PuSIIXG/G+yQ=="
+  },
+  {
+    "record_enc": {
+      "ciphertext": "/L7gXeWPi0d6d8cDlHsMBt7TsUt/GrhpJH0lq7z2u0CeQVwLkf/eTeDvOgGHhFVgHdc968w9h/qzvy2r22Xb5h2Jdt9+Rxn2ukcON8XwlJiMIIHLUWkc64QvRNqhmggV3r5a8s7vzqW6wXMfusMj6Pqv8VPcbWVxLXoK9St/9J4EJGOs8r7KYowgCJ40Vi7pAH/BbRAmk/J7",
+      "tag": "oaaYFdo+mdfoddomUg3Sog=="
+    },
+    "patient_and_key_enc": "A9FUayDiTOHJwqQCVE+KoEfTMU2bsgNh1SpQIre9QFKK5X5AF6psiXQ4VzSPwN9tDmzMfi+kjTI/MIYKY8SyFUmfK3ft3u6obsU2XHOuO2gExzYLt5hLOlwAB9XGK9LkerNbMDt+qU5pvslPpCgYTkqw9zPlRsRJZx+WIHsgNcuJwduTi2L+RnDVohvVM7iVuuHB+a4GEfKpaZ8MJMLVFz5abuHruY4QsR5B0reZoLSQ3tvrmxliABEFPl3sA82hzEWug1tqgUy9i1A88/ytzM1RBkpNRINZ8H4JiPxn0cp6hqXO8REE/1EjaA/WedqZlkHMW6cjJGAYT8m9v5zoNA==",
+    "patient_and_key_enc_for_audit_company": "QiI63WQJ1uYkZwCmZfhhXVXQNy89JoplHrZ2LP1wLR38JGzSYDYQeIbtdZP5KzkPZCbn6/nVp85TPvtDuqcV1k6Tk0pcDJA6LxOHm4Mx+B3BN07Ai1OmsYKYQQ65tFhdrsBhQrGd77JLuHPw3maRwlE9Chs9Uz5Ck4G5Nn17oeG2gLN+AQvFliNSYQPs6U5f0HSY+VqjUWpdZTg4qmn76T+/alCqZMFcBnOCihWj6Wz+RHrq0q2zyfzJcmsle7vV2kL8fjuJLfZiCiPm+7Z05g5bv/7ab8HQJU8OimbX0Px7EnKnJ3GTN6wuSPt/KfdlSGEtrMu1vt69/tI+hW9f2Q=="
+  },
+  {
+    "record_enc": {
+      "ciphertext": "q2l0jycXZ9WfB9Cw69E+nzpif18r/G7/J+A7wV4AsqDafE95pjy4cLSev83xdBadxLCxWdU0PHi3pHe643I3lnXQHIN/XdAGHRJDbgK09JBlNdZq5NFhENTpzh2xcBHCkvqw+x3o2IuJd68U4alwdf1vY0KKO1xXXnQftO5v/i4186AiE+7M8T1OBTGWRoBhnepdA6lYag==",
+      "tag": "i8yXTybtiMOxsY+SEiLHag=="
+    },
+    "patient_and_key_enc": "mv5JZSY/wxjukvtGYbrHQil9unDvAlNrxMxmtGWqRi386odzKfvoMH2UUgOg+JD3EVfYVT/SPJtcs7tTea+JSO2aqeCOQziHdDfuG99QbwFlxM5WPwvTdbvMnKBMth04by9YMuJ9Tt+E1hccg/20AOCgkqBHlLnic4j58rjHLAKsDJEftzjPxLXwCE5YvG2msvzdKzMoLi0JLEQEKgs7OppmlZnRJW3ok+Caga2MD9enrzCEJqhlvO9ycWBglAHyVIYI177bEXm1MOrTAV2n5v9EubbonNfQ+Aqgd4wPtcXbhxGwqSPjpgiIaZPQX/pKI6AegaAoPaH+0xP/9Mq1qg==",
+    "patient_and_key_enc_for_audit_company": "kEexTl5vAwe/PxSkwfqkJqVHngDn0Ulx8RIx3bRoFEkzHtvaVgtfhECZ/mwI4enraM/KDe7uDTYz5RzijDmrSKxS0W/XmuD54V48RyvOnXysqmqddm4QVYHXXL4pHW1qwCM/QiY+LjE2N/O0huOuy8cPXyMpMrhML0/z2A9Mgkd4gCUupsNRBjUud5ABNLgS+IqTpJlrysAKAAYDsoZXXuAgtkHGTs25K4PMpZY7jrUpoQRF9WLRDRPQdawMt/9DRQQxoTBzWLkSA8La83cMSOynrdoieHD7pmV5DY8Ae+MDtwmQA15qTyJ6CkOhW24VqN/Eh2Cb29rML6CA85QWCQ=="
   }
 ]
