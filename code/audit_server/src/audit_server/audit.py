@@ -17,7 +17,7 @@ def log_record(record: AuditRecord):
 def get_ehr_actions(requester, patient):
     if not is_authorized_for_ehrs(requester, patient):
         raise RuntimeError(
-            f"'{requester}' is not authorized to get EHR actions of '{patient}'"
+            f"'{requester}' is not authorized to get EHR actions of '{patient}'\n"
         )
     return audit_db.get_records(patient)
 
