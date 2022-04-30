@@ -387,5 +387,19 @@
     "patient": "bob",
     "requested_by": "john",
     "action": "GET_RECORDS"
+  },
+  {
+    "time": "2022-04-30 17:25:32",
+    "patient": "eve",
+    "requested_by": "johnny",
+    "action": "CREATE",
+    "ehr_id": "1e27ab97c87facc99e3db555ce56fa38"
+  },
+  {
+    "time": "2022-04-30 17:25:47",
+    "patient": "eve",
+    "requested_by": "johnny",
+    "action": "CREATE",
+    "ehr_id": "df767b8aa7540f9848249284babf2fef"
   }
 ]
