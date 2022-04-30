@@ -27,6 +27,18 @@ def is_authorized_for_ehrs(requester, patient):
     if requester == patient:
         return True
 
+    # USC should be able to query information about its patients
+    usc_patients = {"alice", "bob", "eve"}
+    if requester == "usc" and patient in usc_patients:
+        return True
+
+    # UCLA should be able to query information about its patients
+    ucla_patients = {"carol", "david"}
+    if requester == "ucla" and patient in ucla_patients:
+        return True
+
+    return False
+
 
 def create_record(patient, requested_by, action, ehr_id=None):
     t = datetime.now()

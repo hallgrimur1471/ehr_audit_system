@@ -19,10 +19,13 @@ def main():
     else:
         configure_logger(logging.INFO)
 
-    query_usage(args.PATIENT, args.USER_CERT_FILE, args.USER_KEY_FILE)
+    query_usage(args.PATIENT, Path(args.USER_KEY_DIR))
 
 
-def query_usage(patient, user_cert_file, user_key_file):
+def query_usage(patient: str, user_key_dir: Path):
+    user_cert_file = user_key_dir / "tls.crt"
+    user_key_file = user_key_dir / "tls.key"
+
     audit_server_get_request(f"/query_usage/{patient}", user_cert_file, user_key_file)
 
 
@@ -55,11 +58,8 @@ def parse_arguments():
     parser.description = "Query EHR usage for patient"
     parser.add_argument("PATIENT", help=f"Patient to fetch EHR usage about")
     parser.add_argument(
-        "USER_CERT_FILE",
-        help=f"CA signed TLS certification file of patient or audit company",
-    )
-    parser.add_argument(
-        "USER_KEY_FILE", help=f"TLS private key for accompanying certificate"
+        "USER_KEY_DIR",
+        help=f"A directory with the keys user should have received from a system admin.",
     )
     parser.add_argument(
         "-v",
@@ -68,6 +68,18 @@ def parse_arguments():
         help="enables printing of debug statements",
     )
     arguments = parser.parse_args()
+
+    # Validate key directory and its contents
+    key_dir = Path(arguments.USER_KEY_DIR)
+    if not key_dir.exists():
+        raise ValueError(f"USER_KEY_DIR '{key_dir}' does not exist.")
+    if not key_dir.is_dir():
+        raise ValueError(f"USER_KEY_DIR '{key_dir}' is not a directory.")
+    files = [file_.name for file_ in key_dir.iterdir()]
+    required_files = ["tls.key", "tls.crt", "rsa_encrypt.pem", "rsa_decrypt.pem"]
+    for required_file in required_files:
+        if required_file not in files:
+            raise ValueError(f"USER_KEY_DIR must include the file '{required_file}'")
 
     return arguments
 

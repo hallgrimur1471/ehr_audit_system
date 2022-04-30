@@ -21,7 +21,7 @@ def main():
 
 def generate_tls_for_domain(server_domain):
     key_dir = Path(__file__).parent.absolute() / "keys"
-    ca_dir = Path(__file__).parent.absolute() / "ca"
+    ca_dir = Path(__file__).parent.parent.absolute() / "ca/keys"
 
     key_dir.mkdir(exist_ok=True)
 

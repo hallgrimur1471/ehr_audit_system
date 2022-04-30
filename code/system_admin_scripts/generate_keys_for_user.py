@@ -20,19 +20,19 @@ def main():
 
 
 def generate_keys(user_id):
-    key_dir = Path(__file__).parent.absolute() / "keys"
-    ca_dir = Path(__file__).parent.absolute() / "ca"
+    key_dir = Path(__file__).parent.absolute() / f"keys/{user_id}"
+    ca_dir = Path(__file__).parent.parent.absolute() / "ca/keys"
 
-    key_dir.mkdir(exist_ok=True)
+    key_dir.mkdir(exist_ok=True, parents=True)
 
     generate_tls_keys(user_id, key_dir, ca_dir)
     generate_encryption_decryption_keys(user_id, key_dir)
 
 
 def generate_tls_keys(user_id, key_dir, ca_dir):
-    user_key_filename = f"{user_id}_tls.key"
-    user_csr_filename = f"{user_id}_tls.csr"  # csr: certificate signing request
-    user_cert_filename = f"{user_id}_tls.crt"
+    user_key_filename = f"tls.key"
+    user_csr_filename = f"tls.csr"  # csr: certificate signing request
+    user_cert_filename = f"tls.crt"
     user_domain = user_id
 
     ca_key_path = ca_dir / "ca.key"
@@ -76,8 +76,8 @@ def generate_tls_keys(user_id, key_dir, ca_dir):
 
 
 def generate_encryption_decryption_keys(user_id, key_dir):
-    private_key_filename = f"{user_id}_rsa_encrypt.pem"
-    public_key_filename = f"{user_id}_rsa_decrypt.pem"
+    private_key_filename = f"rsa_encrypt.pem"
+    public_key_filename = f"rsa_decrypt.pem"
     generate_rsa_keys(2048, private_key_filename, public_key_filename, key_dir)
 
 
