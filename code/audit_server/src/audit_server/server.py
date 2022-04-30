@@ -62,6 +62,13 @@ def hello():
 
 @app.route("/log_action", methods=["POST"])
 def log_action():
+    log.debug("checking if request comes from ehr_server ...")
+    # Assert request comes from ehr_server,
+    # it's the only entity allowed to call /log_action
+    requester = get_user_id_from_requester_tls_certificate()
+    if requester != "ehr_server":
+        return f"{requester} is not authorized to log EHR actions\n", 403
+
     log.debug("Logging new EHR action ...")
     patient = request.json["patient"]
     requested_by = request.json["requested_by"]
