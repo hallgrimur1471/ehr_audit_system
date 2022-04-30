@@ -3,7 +3,7 @@ import json
 from pathlib import Path
 
 from audit_server.audit_record import AuditRecord
-from audit_server.database import DBEditor
+from audit_server.database import DBEditor, DBReader
 
 log = logging.getLogger("ehr_server.server")
 
@@ -27,5 +27,5 @@ def add_record(record: AuditRecord):
 
 
 def get_records(user):
-    with DBEditor(DB_FILE) as db:
+    with DBReader(DB_FILE) as db:
         return [action for action in db if action["patient"] == user]

@@ -18,3 +18,8 @@ class DBEditor:
 
     def update_db(self):
         self.database_file.write_text(json.dumps(self.db, indent=2) + "\n")
+
+
+class DBReader(DBEditor):
+    def __exit__(self, exc_type, exc_value, tb):
+        pass
