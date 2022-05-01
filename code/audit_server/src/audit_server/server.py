@@ -91,12 +91,11 @@ def log_action():
 def query_usage(patient):
     try:
         requester = get_user_id_from_requester_tls_certificate()
-        try:
-            usage = json.dumps(audit.get_ehr_actions(requester, patient), indent=2)
-        except RuntimeError as err:
-            # RuntimeError is likely requester not authorized, so we send 403
-            return str(err), 403
+        usage = json.dumps(audit.get_ehr_actions(requester, patient), indent=2)
     except RuntimeError as err:
+        if "not authorized" in str(err):
+            # Likely a 'requester not authorized' error
+            return str(err), 403
         return str(err), 500
     return usage
 

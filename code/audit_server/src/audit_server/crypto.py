@@ -1,6 +1,6 @@
 from http import server
 import json
-from base64 import b64encode
+from base64 import b64encode, b64decode
 from pathlib import Path
 
 from Crypto.Cipher import AES, PKCS1_OAEP
@@ -19,12 +19,14 @@ def encrypt_record(record: AuditRecord, patient: str):
     #     "patient_enc": {
     #         "ciphertext": "...",
     #         "ciphertext_tag": "...",
+    #         "ciphertext_nonce": "...",
     #         "key_enc": "...", // encrypted with audit_server's public key
     #         "key_enc_signature": "..." // signed by audit_server
     #     },
     #     "ehr_action_enc": {
     #         "ciphertext": "...",
     #         "ciphertext_tag": "...",
+    #         "ciphertext_nonce": "...",
     #         "for_patient": {
     #             "key_enc": "...", // encrypted with patient's public key
     #             "key_enc_signature": "..." // signed by audit_server
@@ -42,6 +44,51 @@ def encrypt_record(record: AuditRecord, patient: str):
     return db_entry
 
 
+def decrypt_patient_enc(patient_enc):
+    server_rsa_key_for_verifying = get_server_rsa_key_for_verifying()
+
+    # Verify key_enc_signature
+    key_enc = b64decode(patient_enc["key_enc"])
+    hash = SHA256.new(key_enc)
+    signature = b64decode(patient_enc["key_enc_signature"])
+    verifier = pss.new(server_rsa_key_for_verifying)
+    try:
+        verifier.verify(hash, signature)
+    except (ValueError, TypeError):
+        notify_relevent_authorities_of_record_tampering()
+        raise RuntimeError(
+            "It was detected that record has been tampered with, "
+            + "relevant authorities have been notified"
+        )
+
+    # Decrypt key_enc
+    server_rsa_key_for_decrypting = get_server_rsa_key_for_decrypting()
+
+    # Decrypt and verify ciphertext
+    cipher = PKCS1_OAEP.new(server_rsa_key_for_decrypting)
+    ks = cipher.decrypt(key_enc)
+
+    try:
+        nonce = b64decode(patient_enc["ciphertext_nonce"])
+        cipher = AES.new(ks, AES.MODE_GCM, nonce=nonce)
+        ciphertext = b64decode(patient_enc["ciphertext"])
+        tag = b64decode(patient_enc["ciphertext_tag"])
+        patient = cipher.decrypt_and_verify(ciphertext, tag).decode()
+    except (ValueError, KeyError):
+        notify_relevent_authorities_of_record_tampering()
+        raise RuntimeError(
+            "It was detected that a record has been tampered with, "
+            + "relevant authorities have been notified"
+        )
+
+    return patient
+
+
+def notify_relevent_authorities_of_record_tampering():
+    # Not implemented in this project
+    pass
+
+
 def get_patient_enc(patient):
     patient_enc = {}
 
@@ -53,6 +100,7 @@ def get_patient_enc(patient):
     ciphertext, tag = cipher.encrypt_and_digest(patient.encode())
     patient_enc["ciphertext"] = b64encode(ciphertext).decode()
     patient_enc["ciphertext_tag"] = b64encode(tag).decode()
+    patient_enc["ciphertext_nonce"] = b64encode(cipher.nonce).decode()
 
     # Encrypt the symmetric key using server's RSA encryption public key
     server_rsa_pubkey_for_encryption = get_server_rsa_pubkey_for_encryption()
@@ -80,6 +128,7 @@ def get_ehr_action_enc(record, patient):
     ciphertext, tag = cipher.encrypt_and_digest(str(record).encode())
     ehr_action_enc["ciphertext"] = b64encode(ciphertext).decode()
     ehr_action_enc["ciphertext_tag"] = b64encode(tag).decode()
+    ehr_action_enc["ciphertext_nonce"] = b64encode(cipher.nonce).decode()
 
     # Encrypt the symmetric key using patient's RSA encryption public key
     patient_rsa_pubkey_for_encryption = get_rsa_encryption_pubkey(patient)
@@ -133,15 +182,25 @@ def get_rsa_encryption_pubkey(entity):
 
 
 def get_server_rsa_pubkey_for_encryption():
-    pubkey_path = get_server_keys_dir() / "rsa_encrypt.pem"
-    pubkey = RSA.import_key(pubkey_path.read_bytes())
-    return pubkey
+    return get_server_key("rsa_encrypt.pem")
 
 
 def get_server_rsa_pubkey_for_signing():
-    pubkey_path = get_server_keys_dir() / "rsa_sign.pem"
-    pubkey = RSA.import_key(pubkey_path.read_bytes())
-    return pubkey
+    return get_server_key("rsa_sign.pem")
+
+
+def get_server_rsa_key_for_verifying():
+    return get_server_key("rsa_verify.pem")
+
+
+def get_server_rsa_key_for_decrypting():
+    return get_server_key("rsa_decrypt.pem")
+
+
+def get_server_key(filename):
+    key_path = get_server_keys_dir() / filename
+    key = RSA.import_key(key_path.read_bytes())
+    return key
 
 
 def get_server_keys_dir():

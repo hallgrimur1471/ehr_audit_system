@@ -8,8 +8,8 @@ from audit_server.audit_record import AuditRecord
 
 
 def log(patient, requested_by, action, ehr_id=None):
-    record = create_record(patient, requested_by, action, ehr_id=ehr_id)
-    record_enc = crypto.encrypt_record(record, patient)
+    audit_record = create_audit_record(patient, requested_by, action, ehr_id=ehr_id)
+    record_enc = crypto.encrypt_record(audit_record, patient)
     log_record(record_enc)
 
 
@@ -22,7 +22,15 @@ def get_ehr_actions(requester, patient):
         raise RuntimeError(
             f"'{requester}' is not authorized to get EHR actions of '{patient}'\n"
         )
-    return audit_db.get_records(patient)
+    all_records = audit_db.get_records()
+
+    patients_records = [
+        record for record in all_records if is_record_of_patient(record, patient)
+    ]
+
+    ehr_actions_enc = [r["ehr_action_enc"] for r in patients_records]
+
+    return ehr_actions_enc
 
 
 def is_authorized_for_ehrs(requester, patient):
@@ -40,7 +48,17 @@ def is_authorized_for_ehrs(requester, patient):
     return False
 
 
-def create_record(patient, requested_by, action, ehr_id=None) -> AuditRecord:
+def is_record_of_patient(record, patient):
+    record_patient = get_record_patient(record)
+    print(record_patient)
+    return record_patient == patient
+
+
+def get_record_patient(record):
+    return crypto.decrypt_patient_enc(record["patient_enc"])
+
+
+def create_audit_record(patient, requested_by, action, ehr_id=None) -> AuditRecord:
     t = datetime.now()
     return AuditRecord(
         time=t, patient=patient, requested_by=requested_by, action=action, ehr_id=ehr_id

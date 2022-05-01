@@ -26,6 +26,6 @@ def add_record(record: dict):
         db.append(record)
 
 
-def get_records(user):
+def get_records():
     with DBReader(DB_FILE) as db:
-        return [action for action in db if action["patient"] == user]
+        return db

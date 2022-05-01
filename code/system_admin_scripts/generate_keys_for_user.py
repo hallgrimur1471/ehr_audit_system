@@ -76,8 +76,8 @@ def generate_tls_keys(user_id, key_dir, ca_dir):
 
 
 def generate_encryption_decryption_keys(user_id, key_dir):
-    private_key_filename = f"rsa_encrypt.pem"
-    public_key_filename = f"rsa_decrypt.pem"
+    private_key_filename = f"rsa_decrypt.pem"
+    public_key_filename = f"rsa_encrypt.pem"
     generate_rsa_keys(2048, private_key_filename, public_key_filename, key_dir)
 
 

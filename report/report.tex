@@ -189,6 +189,10 @@
 		```
 		for user in alice bob carol david eve usc ucla; do cp audit_client/keys/${user}/rsa_encrypt.pem audit_server/keys/known_pubkeys/${user}/
 		```
+
+		Possible vulnerability: determine patient name length on length of ciphertext
+
+		Possible vulnerability: there is no protection against swapping ehr_action_enc in the database, impact not great because of encryption.
 		
 		\section{Introduction}
 
