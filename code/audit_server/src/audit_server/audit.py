@@ -50,7 +50,6 @@ def is_authorized_for_ehrs(requester, patient):
 
 def is_record_of_patient(record, patient):
     record_patient = get_record_patient(record)
-    print(record_patient)
     return record_patient == patient
 
 

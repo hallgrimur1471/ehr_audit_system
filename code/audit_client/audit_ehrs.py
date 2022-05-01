@@ -15,6 +15,7 @@ from Crypto.Cipher import AES, PKCS1_OAEP
 from Crypto.Signature import pss
 from Crypto.Hash import SHA256
 from Crypto.PublicKey import RSA
+import OpenSSL.crypto
 
 AUDIT_SERVER_BASEURL = "https://audit_server:5001"
 
@@ -142,7 +143,13 @@ def decrypt_record(encrypted_record, is_audit_company, user_key_dir):
 
 
 def is_audit_company_cert_file(cert_file):
-    return False
+    cert = OpenSSL.crypto.load_certificate(
+        OpenSSL.crypto.FILETYPE_PEM, cert_file.read_bytes()
+    )
+    client_id = cert.get_subject().commonName
+
+    audit_companies = {"usc", "ucla"}
+    return client_id in audit_companies
 
 
 def get_key(filename, user_key_dir):
