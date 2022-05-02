@@ -6,8 +6,8 @@ workspace "EHR" "This is a model of EHR system" {
         
             ehr_system = softwareSystem "EHR System" "EHR & auditing system" {
                 ehr_api = container "EHR Rest API" "API for doing EHR operations" "Flask server"
-                ehr_client = container "EHR program" "Client program to do EHR operations" "Python CLI program"
-                audit_client = container "Audit program" "Client program to audit EHR action history" "Python CLI program"
+                ehr_client = container "EHR application" "Client program to do EHR operations" "Python CLI program"
+                audit_client = container "Audit application" "Client program to audit EHR action history" "Python CLI program"
                 audit_api = container "Audit Rest API" "API to log and query EHR actions"
                 ehr_db = container "EHR database" "Stores all EHRs" "JSON file" "data_storage"
                 audit_db = container "Audit log" "An encrypted log of all EHR actions" "JSON file" "data_storage"

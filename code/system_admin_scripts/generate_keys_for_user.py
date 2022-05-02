@@ -102,7 +102,7 @@ def parse_arguments():
     parser = argparse.ArgumentParser()
     parser.description = (
         "Generate RSA keypair for a user "
-        + "along with a TLS key and cert signed by a CA"
+        + "along with a TLS key and cert signed by a CA."
     )
     parser.add_argument("USER_ID", type=str, help="User to generate keys for")
     parser.add_argument(

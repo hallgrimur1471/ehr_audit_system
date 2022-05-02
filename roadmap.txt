@@ -77,6 +77,11 @@ openssl s_client -CAfile FlexCA.pem -cert FlexClient.pem -key FlexClient.key -co
 openssl s_client -CAfile FlexCA.pem -cert FlexClient.pem -key FlexClient.key -connect example.com:5000 -tls1_2
 openssl s_client -CAfile FlexCA.pem -cert FlexClient.pem -key FlexClient.key -connect example.com:5000 -tls1_1
 openssl s_client -CAfile FlexCA.pem -cert FlexClient.pem -key FlexClient.key -connect example.com:5000 -tls1
+
+openssl s_client -CAfile ../ca/keys/ca.crt -cert keys/ehr_server_tls.crt -key keys/ehr_server_tls.key -connect audit_server:5001 -tls1_3 >/dev/null 2>&1 0>&1; echo $?;
+openssl s_client -CAfile ../ca/keys/ca.crt -cert keys/ehr_server_tls.crt -key keys/ehr_server_tls.key -connect audit_server:5001 -tls1_2 >/dev/null 2>&1 0>&1; echo $?;
+openssl s_client -CAfile ../ca/keys/ca.crt -cert keys/ehr_server_tls.crt -key keys/ehr_server_tls.key -connect audit_server:5001 -tls1_1 >/dev/null 2>&1 0>&1; echo $?;
+openssl s_client -CAfile ../ca/keys/ca.crt -cert keys/ehr_server_tls.crt -key keys/ehr_server_tls.key -connect audit_server:5001 -tls1 >/dev/null 2>&1 0>&1; echo $?;
 # https://www.howtouselinux.com/post/ssl-vs-tls-and-how-to-check-tls-version-in-linux#:~:text=OpenSSL%20command%20is%20the%20easiest,host.com%3A443%20%2Dtls1_1
 ```
 

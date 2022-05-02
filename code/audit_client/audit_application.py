@@ -160,7 +160,7 @@ def get_key(filename, user_key_dir):
 
 def parse_arguments():
     parser = argparse.ArgumentParser()
-    parser.description = "Query EHR usage for patient"
+    parser.description = "Query EHR action history for patient"
     parser.add_argument("PATIENT", help=f"Patient to fetch EHR usage about")
     parser.add_argument(
         "USER_KEY_DIR",
